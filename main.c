@@ -22,6 +22,8 @@ int main() {
     //
     char winner = ' ';
     resetBoard();
+    printBoard();
+    
 
     //
     return 0;
@@ -38,7 +40,13 @@ void resetBoard() {
 }
 
 void printBoard() {
-
+    for(int i = 0; i < 3; i++) {
+        printf(" %c  | %c  | %c  ", board[i][0], board[i][1], board[i][2]);
+        if(i != 2) {
+            printf("\n----|----|----\n");
+        }
+    }
+    puts("\n");
 }
 
 void checkFreeSpaces() {
