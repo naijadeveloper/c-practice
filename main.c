@@ -6,7 +6,7 @@
 // functions
 void resetBoard();
 void printBoard();
-void checkFreeSpaces();
+int checkFreeSpaces();
 void playerMove();
 void computerMove();
 char checkWinner();
@@ -22,7 +22,10 @@ int main() {
     //
     char winner = ' ';
     resetBoard();
-    printBoard();
+
+    while(winner == ' ' && checkFreeSpaces() != 0) {
+        printBoard();
+    }
     
 
     //
@@ -49,8 +52,18 @@ void printBoard() {
     puts("\n");
 }
 
-void checkFreeSpaces() {
+int checkFreeSpaces() {
+    int free_spaces = 9;
 
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 3; j++) {
+            if(board[i][j] != ' ') {
+                free_spaces--;
+            }
+        }
+    }
+
+    return free_spaces;
 }
 
 void playerMove() {
