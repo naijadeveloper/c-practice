@@ -76,17 +76,17 @@ void playerMove() {
         do {
             printf("\nPlease enter row (1-3): ");
             scanf("%d", &x);
-        } while(!(x < 1) && !(x > 3));
+        } while(x < 1 || x > 3);
         x--; // in array world its 0-2 not 1-3
 
         do {
             printf("\nPlease enter col (1-3): ");
             scanf("%d", &y);
-        } while(!(y < 1) && !(y > 3));
+        } while(y < 1 || y > 3);
         y--; // in array world its 0-2 not 1-3
 
         if(board[x][y] != ' ') {
-            puts("\nSorry position already taken. Try again\n");
+            puts("\nSorry position already taken. Try again\n\n");
             printBoard();
         }
     } while(board[x][y] != ' ');
