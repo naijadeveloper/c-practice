@@ -26,6 +26,7 @@ int main() {
     while(winner == ' ' && checkFreeSpaces() != 0) {
         printBoard();
         playerMove();
+        winner = checkWinner();
     }
     
 
@@ -100,6 +101,34 @@ void computerMove() {
 
 char checkWinner() {
 
+    // horizontal check i.e checking each row
+    for(int i = 0; i < 3; i++) {
+        if(board[i][0] == board[i][1] && board[i][0] == board[i][2]) {
+            return board[i][0];
+        }
+    }
+
+    // vertical check i.e checking each col
+    for(int i = 0; i < 3; i++) {
+        if(board[0][i] == board[1][i] && board[0][i] == board[2][i]) {
+            return board[0][i];
+        }
+    }
+
+    // diagonal checks
+    for(int i = 0; i < 2; i++) {
+        if(i == 0 && board[0][0] == board[1][1] && board[0][0] == board[2][2]) {
+            return board[0][0];
+        }
+
+        if(board[0][2] == board[1][1] && board[0][2] == board[2][0]) {
+            return board[0][2];
+        }
+    }
+
+    // if no conditional gives true
+    return ' ';
+    
 }
 
 void printWinner(char winner_char) {
