@@ -25,8 +25,22 @@ int main() {
 
     while(winner == ' ' && checkFreeSpaces() != 0) {
         printBoard();
+
+        // player moves
         playerMove();
         winner = checkWinner();
+
+        if(winner != ' ' || checkFreeSpaces() == 0) {
+            break;
+        }
+
+        // computer moves
+        computerMove();
+        winner = checkWinner();
+
+        if(winner != ' ' || checkFreeSpaces() == 0) {
+            break;
+        }
     }
     
 
@@ -96,7 +110,22 @@ void playerMove() {
 }
 
 void computerMove() {
+    int x, y;
 
+    // generate random row num and col num for computer
+    srand(time(0));
+
+    if(checkFreeSpaces() > 0) {
+        do {
+            x = rand() % 3;
+            y = rand() % 3;
+        } while (board[x][y] != ' ');
+
+        board[x][y] = COMPUTER;
+        
+    } else {
+        printWinner(' ');
+    }
 }
 
 char checkWinner() {
@@ -132,5 +161,11 @@ char checkWinner() {
 }
 
 void printWinner(char winner_char) {
-
+    if(winner_char == PLAYER) {
+        puts("CONGRATULATIONS!! YOU WON!!");
+    } else if(winner_char == COMPUTER) {
+        puts("HEHEHE IN YOUR FACE!! I WIN, YOU LOSE HAHAHAHAHA");
+    } else {
+        puts("WELL, IT'S A TIE!!!");
+    }
 }
