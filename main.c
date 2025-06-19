@@ -19,30 +19,51 @@ const char COMPUTER = 'O';
 
 
 int main() {
-    //
+    char response = ' ';
     char winner = ' ';
-    resetBoard();
+    puts("NOTE: YOU ARE X AND COMPUTER IS O");
+    //
+    do {
+        resetBoard();
+        response = ' ';
+        winner = ' ';
 
-    while(winner == ' ' && checkFreeSpaces() != 0) {
+        while(winner == ' ' && checkFreeSpaces() != 0) {
+            // info[30] = " ";
+            printBoard();
+
+            // player moves
+            playerMove();
+            winner = checkWinner();
+
+            if(winner != ' ' || checkFreeSpaces() == 0) {
+                break;
+            }
+
+            // computer moves
+            computerMove();
+            winner = checkWinner();
+
+            if(winner != ' ' || checkFreeSpaces() == 0) {
+                break;
+            }
+
+            puts("\t**Your turn again**");
+
+        }
+
+        puts("");
         printBoard();
+        printWinner(winner);
 
-        // player moves
-        playerMove();
-        winner = checkWinner();
-
-        if(winner != ' ' || checkFreeSpaces() == 0) {
-            break;
-        }
-
-        // computer moves
-        computerMove();
-        winner = checkWinner();
-
-        if(winner != ' ' || checkFreeSpaces() == 0) {
-            break;
-        }
-    }
-    
+        // ask user if he/she would like to play again
+        printf("Would you like to play again? (Y/N): ");
+        scanf("%c");
+        scanf("%c", &response);
+        response = toupper(response);
+        printf("response: (%c)", response);
+        puts("");
+    } while (response == 'Y');
 
     //
     return 0;
@@ -65,7 +86,7 @@ void printBoard() {
             printf("\n----|----|----\n");
         }
     }
-    puts("\n");
+    puts("");
 }
 
 int checkFreeSpaces() {
@@ -87,20 +108,32 @@ void playerMove() {
 
     do {
         // get user's input
+        puts("----ROW MOVE----");
         do {
-            printf("\nPlease enter row (1-3): ");
+            printf("Enter row number (1 - 3): ");
             scanf("%d", &x);
+
+            // print error mssg
+            if(x < 1 || x > 3) {
+                puts("**Not a valid entry**");
+            }
         } while(x < 1 || x > 3);
         x--; // in array world its 0-2 not 1-3
 
+        puts("\n----COLUMN MOVE----");
         do {
-            printf("\nPlease enter col (1-3): ");
+            printf("Enter col number (1 - 3): ");
             scanf("%d", &y);
+
+            // print error mssg
+            if(y < 1 || y > 3) {
+                puts("**Not a valid entry**");
+            }
         } while(y < 1 || y > 3);
         y--; // in array world its 0-2 not 1-3
 
         if(board[x][y] != ' ') {
-            puts("\nSorry position already taken. Try again\n\n");
+            puts("\n**Sorry position already taken. Try again**\n");
             printBoard();
         }
     } while(board[x][y] != ' ');
@@ -122,6 +155,8 @@ void computerMove() {
         } while (board[x][y] != ' ');
 
         board[x][y] = COMPUTER;
+
+        printf("\n----Computer moved to row %d and col %d----\n", x+1, y+1);
         
     } else {
         printWinner(' ');
@@ -164,7 +199,7 @@ void printWinner(char winner_char) {
     if(winner_char == PLAYER) {
         puts("CONGRATULATIONS!! YOU WON!!");
     } else if(winner_char == COMPUTER) {
-        puts("HEHEHE IN YOUR FACE!! I WIN, YOU LOSE HAHAHAHAHA");
+        puts("COMPUTER WINS THIS ROUND!! BETTER LUCK NEXT TIME!");
     } else {
         puts("WELL, IT'S A TIE!!!");
     }
