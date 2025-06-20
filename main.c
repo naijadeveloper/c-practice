@@ -52,18 +52,17 @@ int main() {
 
         }
 
-        puts("");
         printBoard();
         printWinner(winner);
 
         // ask user if he/she would like to play again
-        printf("Would you like to play again? (Y/N): ");
-        scanf("%c");
+        getchar();
+        printf("\nWould you like to play again? (Y/N): ");
         scanf("%c", &response);
         response = toupper(response);
-        printf("response: (%c)", response);
-        puts("");
     } while (response == 'Y');
+
+    puts("\nTHANKS FOR PLAYING!!!");
 
     //
     return 0;
@@ -197,10 +196,10 @@ char checkWinner() {
 
 void printWinner(char winner_char) {
     if(winner_char == PLAYER) {
-        puts("CONGRATULATIONS!! YOU WON!!");
+        printf("CONGRATULATIONS!! YOU WON!!");
     } else if(winner_char == COMPUTER) {
-        puts("COMPUTER WINS THIS ROUND!! BETTER LUCK NEXT TIME!");
+        printf("COMPUTER WINS THIS ROUND!! BETTER LUCK NEXT TIME!");
     } else {
-        puts("WELL, IT'S A TIE!!!");
+        printf("WELL, IT'S A TIE!!!");
     }
 }
