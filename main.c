@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 
 void bubble_sort(int array[], int length) {
@@ -47,10 +48,25 @@ int find_max_array(int array[], int length) {
     return max;
 }
 
+int count_value_number(int array[], int length, int value) {
+    int count = 0;
+
+    for(int i = 0; i < length; i++) {
+        if(array[i] == value) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
 
 int main(void) {
-    int array[] = {5, 9, 10, 11, 4, 3, 8, 6, 7};
+    int array[] = {5, 9, 10, 3, 11, 4, 3, 3, 8, 6, 7, 3};
     int length = sizeof(array)/sizeof(array[0]);
+
+    // 4) int res = count_value_number(array, length, 3);
+    // printf("res: %d\n", res);
 
     // 3) int res = find_max_array(array, length);
     // printf("res: %d\n", res);

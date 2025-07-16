@@ -1,2 +1,5 @@
-main.exe
-a.exe
+.vscode
+*.exe
+*.c
+*.txt
+!main.c
